@@ -53,8 +53,12 @@
             </div>
 
             <!-- Archivo de logo -->
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
+                <label>Logo</label>
                 <input type="file" (change)="onFileSelected($event)" class="form-control">
+                <div *ngIf="mostrarErrores && !selectedFile" class="text-danger small">
+                    La imagen del equipo es obligatoria.
+                </div>
             </div>
 
             <!-- Botón -->

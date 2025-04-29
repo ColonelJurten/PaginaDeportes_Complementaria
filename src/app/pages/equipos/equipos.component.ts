@@ -17,6 +17,7 @@ export class EquiposComponent {
   equipos: Equipo[] = [];
   equipo: Equipo = {} as Equipo;
   selectedFile!: File;
+  mostrarErrores: boolean = false;
   intentadoAgregar: boolean = false; // 🔥 Nueva propiedad de control
 
   constructor(private equiposService: EquiposService) {
@@ -104,4 +105,5 @@ export class EquiposComponent {
     this.selectedFile = undefined!;
     this.intentadoAgregar = false; // 🔥 Resetear intento de alerta al limpiar formulario
   }
+  
 }
