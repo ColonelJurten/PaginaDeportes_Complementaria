@@ -1,0 +1,101 @@
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Gestión de Árbitros</h1>
+
+    <!-- Formulario de Árbitros -->
+    <form (ngSubmit)="arbitro.id ? updateArbitro() : insertarArbitro()">
+        <div class="row g-3">
+
+            <!-- Nombre -->
+            <div class="col-md-6">
+                <input type="text" [(ngModel)]="arbitro.nombre" name="nombre" class="form-control" placeholder="Nombre"
+                    required>
+                <small *ngIf="arbitro.nombre?.trim() === '' || arbitro.nombre == null" class="text-danger">
+                    El nombre es obligatorio.
+                </small>
+            </div>
+
+            <!-- Edad -->
+            <div class="col-md-6">
+                <input type="number" [(ngModel)]="arbitro.edad" name="edad" class="form-control" placeholder="Edad"
+                    required>
+                <small *ngIf="arbitro.edad == null" class="text-danger">
+                    La edad es obligatoria.
+                </small>
+            </div>
+
+            <!-- Especialidad -->
+            <div class="col-md-6">
+                <input type="text" [(ngModel)]="arbitro.especialidad" name="especialidad" class="form-control"
+                    placeholder="Especialidad (Ej: Central, VAR)" required>
+                <small *ngIf="arbitro.especialidad?.trim() === '' || arbitro.especialidad == null" class="text-danger">
+                    La especialidad es obligatoria.
+                </small>
+            </div>
+
+            <!-- Experiencia -->
+            <div class="col-md-6">
+                <input type="number" [(ngModel)]="arbitro.experiencia" name="experiencia" class="form-control"
+                    placeholder="Años de experiencia" required>
+                <small *ngIf="arbitro.experiencia == null" class="text-danger">
+                    Los años de experiencia son obligatorios.
+                </small>
+            </div>
+
+            <!-- Estado (Activo o No Activo) -->
+            <div class="col-md-6">
+                <select [(ngModel)]="arbitro.activo" name="activo" class="form-select" required>
+                    <option [ngValue]="true">Activo</option>
+                    <option [ngValue]="false">Inactivo</option>
+                </select>
+                <small *ngIf="arbitro.activo == null" class="text-danger">
+                    El estado de actividad es obligatorio.
+                </small>
+            </div>
+
+            <!-- Botón de Guardar -->
+            <div class="col-12 d-grid gap-2">
+                <button type="submit" class="btn btn-primary" [disabled]="!validarFormulario()">
+                    {{ arbitro.id ? 'Modificar Árbitro' : 'Agregar Árbitro' }}
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    <!-- Separador -->
+    <hr class="my-4">
+
+    <!-- Tabla de Árbitros -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Edad</th>
+                    <th>Especialidad</th>
+                    <th>Experiencia (años)</th>
+                    <th>Activo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let arb of arbitros">
+                    <td>{{ arb.nombre }}</td>
+                    <td>{{ arb.edad }}</td>
+                    <td>{{ arb.especialidad }}</td>
+                    <td>{{ arb.experiencia }}</td>
+                    <td>
+                        <span *ngIf="arb.activo" class="badge bg-success">Activo</span>
+                        <span *ngIf="!arb.activo" class="badge bg-danger">Inactivo</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-success btn-sm" (click)="selectArbitro(arb)">Seleccionar</button>
+                        <button class="btn btn-danger btn-sm" (click)="arbitro = arb; deleteArbitro()">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

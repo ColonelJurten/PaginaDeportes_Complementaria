@@ -1,0 +1,88 @@
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Gestión de Jugadores</h1>
+
+    <form (ngSubmit)="jugador.id ? updateJugador() : insertarJugador()">
+        <div class="row g-3">
+
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="jugador.nombre" name="nombre" class="form-control" placeholder="Nombre"
+                    required>
+                <small *ngIf="jugador.nombre?.trim() === '' || jugador.nombre == null" class="text-danger">
+                    El nombre es obligatorio.
+                </small>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="jugador.posicion" name="posicion" class="form-control"
+                    placeholder="Posición" required>
+                <small *ngIf="jugador.posicion?.trim() === '' || jugador.posicion == null" class="text-danger">
+                    La posición es obligatoria.
+                </small>
+            </div>
+
+            <div class="col-md-4">
+                <input type="number" [(ngModel)]="jugador.numero" name="numero" class="form-control"
+                    placeholder="Número" required>
+                <small *ngIf="jugador.numero == null" class="text-danger">
+                    El número es obligatorio.
+                </small>
+            </div>
+
+            <div class="col-md-4">
+                <input type="number" [(ngModel)]="jugador.edad" name="edad" class="form-control" placeholder="Edad"
+                    required>
+                <small *ngIf="jugador.edad == null" class="text-danger">
+                    La edad es obligatoria.
+                </small>
+            </div>
+
+            <div class="col-md-4">
+                <input type="text" [(ngModel)]="jugador.equipo" name="equipo" class="form-control" placeholder="Equipo"
+                    required>
+                <small *ngIf="jugador.equipo?.trim() === '' || jugador.equipo == null" class="text-danger">
+                    El nombre del equipo es obligatorio.
+                </small>
+            </div>
+
+            <div class="col-12 d-grid gap-2">
+                <button type="submit" class="btn btn-primary" [disabled]="!validarFormulario()">
+                    {{ jugador.id ? 'Modificar Jugador' : 'Agregar Jugador' }}
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    <hr class="my-4">
+
+    <!-- Tabla de Jugadores -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Posición</th>
+                    <th>Número</th>
+                    <th>Edad</th>
+                    <th>Equipo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let jug of jugadores">
+                    <td>{{ jug.nombre }}</td>
+                    <td>{{ jug.posicion }}</td>
+                    <td>{{ jug.numero }}</td>
+                    <td>{{ jug.edad }}</td>
+                    <td>{{ jug.equipo }}</td>
+                    <td>
+                        <button class="btn btn-success btn-sm" (click)="selectJugador(jug)">Seleccionar</button>
+                        <button class="btn btn-danger btn-sm" (click)="jugador = jug; deleteJugador()">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

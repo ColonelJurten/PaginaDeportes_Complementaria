@@ -1,0 +1,102 @@
+<div class="container mt-4">
+
+    <!-- Título -->
+    <h1 class="text-center mb-4">Gestión de Equipos</h1>
+
+    <!-- Formulario -->
+    <form (ngSubmit)="equipo.id ? updateEquipo() : insertarEquipo()">
+        <div class="row g-3">
+
+            <!-- Nombre del equipo -->
+            <div class="col-md-6">
+                <input type="text" [(ngModel)]="equipo.nombre" name="nombre" class="form-control"
+                    placeholder="Nombre del equipo" required>
+                <small *ngIf="equipo.nombre?.trim() === '' || equipo.nombre == null" class="text-danger">
+                    El nombre del equipo es obligatorio.
+                </small>
+            </div>
+
+            <!-- Ciudad -->
+            <div class="col-md-6">
+                <input type="text" [(ngModel)]="equipo.ciudad" name="ciudad" class="form-control" placeholder="Ciudad"
+                    required>
+                <small *ngIf="equipo.ciudad?.trim() === '' || equipo.ciudad == null" class="text-danger">
+                    La ciudad es obligatoria.
+                </small>
+            </div>
+
+            <!-- Año de fundación -->
+            <div class="col-md-6">
+                <input type="number" [(ngModel)]="equipo.fundacion" name="fundacion" class="form-control"
+                    placeholder="Año de fundación" required>
+                <small *ngIf="equipo.fundacion == null" class="text-danger">
+                    El año de fundación es obligatorio.
+                </small>
+            </div>
+
+            <!-- Nombre del estadio -->
+            <div class="col-md-6">
+                <input type="text" [(ngModel)]="equipo.estadio" name="estadio" class="form-control"
+                    placeholder="Nombre del estadio" required>
+                <small *ngIf="equipo.estadio?.trim() === '' || equipo.estadio == null" class="text-danger">
+                    El nombre del estadio es obligatorio.
+                </small>
+            </div>
+
+            <!-- Entrenador -->
+            <div class="col-md-6">
+                <input type="text" [(ngModel)]="equipo.entrenador" name="entrenador" class="form-control"
+                    placeholder="Entrenador" required>
+                <small *ngIf="equipo.entrenador?.trim() === '' || equipo.entrenador == null" class="text-danger">
+                    El nombre del entrenador es obligatorio.
+                </small>
+            </div>
+
+            <!-- Archivo de logo -->
+            <div class="col-md-6">
+                <input type="file" (change)="onFileSelected($event)" class="form-control">
+            </div>
+
+            <!-- Botón -->
+            <div class="col-12 d-grid gap-2">
+                <button type="submit" class="btn btn-primary" [disabled]="!validarFormulario()">
+                    {{ equipo.id ? 'Modificar Equipo' : 'Agregar Equipo' }}
+                </button>
+            </div>
+
+        </div>
+    </form>
+
+    <!-- Separador -->
+    <hr class="my-4">
+
+    <!-- Cards de Equipos -->
+    <div class="row row-cols-1 row-cols-md-3 g-3">
+        <div class="col" *ngFor="let eq of equipos">
+            <div class="card h-100 shadow-sm">
+
+                <!-- Logo -->
+                <img *ngIf="eq.logoURL" [src]="eq.logoURL" class="card-img-top p-3" alt="Logo del Equipo"
+                    style="height: 200px; object-fit: contain;">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{ eq.nombre }}</h5>
+                    <p class="card-text">
+                        <strong>Ciudad:</strong> {{ eq.ciudad }}<br>
+                        <strong>Fundación:</strong> {{ eq.fundacion }}<br>
+                        <strong>Estadio:</strong> {{ eq.estadio }}<br>
+                        <strong>Entrenador:</strong> {{ eq.entrenador }}
+                    </p>
+
+                    <!-- Botones -->
+                    <div class="d-flex justify-content-between">
+                        <button class="btn btn-success btn-sm" (click)="selectEquipo(eq)">Seleccionar</button>
+                        <button class="btn btn-danger btn-sm" (click)="equipo = eq; deleteEquipo()">Eliminar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark custom-navbar fixed-top">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" routerLink="/">
+            <img src="../../../assets/images/logo-liga.png" alt="Logo" height="40" class="me-2">
+            <span> Liga Deportiva</span>
+        </a>
+
+        <!-- Botón menú móvil -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Enlaces -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/equipos" routerLinkActive="active">Equipos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/jugadores" routerLinkActive="active">Jugadores</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/arbitros" routerLinkActive="active">Árbitros</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
